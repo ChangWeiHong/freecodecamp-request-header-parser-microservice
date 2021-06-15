@@ -26,8 +26,19 @@ app.get("/api/hello", function (req, res) {
 });
 
 
+const { networkInterfaces } = require('os');
+const nets = networkInterfaces();
+const results = Object.create(null);
+
+resObj = {};
+app.get("/api/whoami", function(req, res){
+  resObj["ipaddress"] = req.headers["host"];
+  resObj["language"] = req.headers["accept-language"];
+  resObj["software"] = req.headers["user-agent"];
+  res.json(resObj);
+});
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
