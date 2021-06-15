@@ -26,10 +26,6 @@ app.get("/api/hello", function (req, res) {
 });
 
 
-const { networkInterfaces } = require('os');
-const nets = networkInterfaces();
-const results = Object.create(null);
-
 resObj = {};
 app.get("/api/whoami", function(req, res){
   resObj["ipaddress"] = req.headers["host"];
@@ -37,6 +33,7 @@ app.get("/api/whoami", function(req, res){
   resObj["software"] = req.headers["user-agent"];
   res.json(resObj);
 });
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
